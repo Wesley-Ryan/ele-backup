@@ -1,5 +1,5 @@
 # ele-backup
-A first attempt at something useful with Rust. WIP
+A first attempt at something useful with Rust. Needless to say (WIP).<br> <br>
 To compile from source ensure cargo is installed on the system . Clone the repo and run `cargo build` binary will be available `target/debug/ele` .
 
 ## USAGE
