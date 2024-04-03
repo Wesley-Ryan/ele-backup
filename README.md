@@ -5,12 +5,12 @@ To compile from source ensure cargo is installed on the system . Clone the repo 
 ## USAGE
 
 ### Update
-Update the system after a successful timeshift snapshot is created
+Update the system with `dnf` after a successful timeshift snapshot is created
 ```
 sudo ele update
 ```
 ## Install 
-Install a package using dnf after a successful timeshift snapshot is created. 
+Install a package with `dnf` after a successful timeshift snapshot is created. 
 ```
 sudo ele install <package>
 ```
