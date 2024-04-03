@@ -19,14 +19,12 @@ fn main() {
     // Check the first argument
     match args[1].as_str() {
         "update" => {
-            println!("Running update command...");
             update_system();
         }
         "install" => {
             // Check if the second argument exists
             if args.len() == 3 {
                 let package = &args[2];
-                println!("Installing package: {}", package);
                 match install_package(package) {
                     Ok(()) => println!("Package '{}' installed successfully.", package),
                     Err(err) => eprintln!("Error: {}", err),

@@ -10,7 +10,6 @@ pub fn update_system() {
     match timeshift_result {
         Ok(status) => {
             if status.success() {
-							println!("Timeshift snapshot created successfully.");
                 // Run dnf update only if Timeshift was successful
                 let dnf_result = Command::new("sudo")
                     .arg("dnf")
