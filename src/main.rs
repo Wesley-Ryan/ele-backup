@@ -7,37 +7,37 @@ use crate::update::update_system;
 use crate::install::install_package;
 
 fn main() {
-    // Collect command line arguments
     let args: Vec<String> = env::args().collect();
-
-    // Check if any arguments are provided
     if args.len() < 2 {
-        println!("Usage: {} <command>", args[0]);
+        print_usage(&args[0]);
         return;
     }
 
-    // Check the first argument
     match args[1].as_str() {
-        "update" => {
-            update_system();
-        }
+        "update" => update_system(), // `update_system` directly handles errors and exits.
         "install" => {
-            // Check if the second argument exists
-            if args.len() == 3 {
-                let package = &args[2];
-                match install_package(package) {
-                    Ok(()) => println!("Package '{}' installed successfully.", package),
-                    Err(err) => eprintln!("Error: {}", err),
-                }
-                return;
-            } else {
+            if args.len() < 3 {
                 println!("Usage: {} install <package_name>", args[0]);
                 return;
             }
+            let package = &args[2];
+            match install_package(package) {
+                Ok(()) => println!("Package '{}' installed successfully.", package),
+                Err(err) => eprintln!("Error installing package '{}': {}", package, err),
+            }
         }
-        _ => {
-            println!("Invalid command: {}", args[1]);
-            println!("Usage: {} <command>", args[0]);
-        }
+        _ => print_invalid_command(&args[1], &args[0]),
     }
+}
+
+fn print_usage(program_name: &str) {
+    println!("Usage: {} <command>", program_name);
+    println!("Commands:");
+    println!("  update                    Updates the system");
+    println!("  install <package_name>    Installs the specified package");
+}
+
+fn print_invalid_command(command: &str, program_name: &str) {
+    println!("Invalid command: {}", command);
+    print_usage(program_name);
 }
